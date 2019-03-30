@@ -440,6 +440,7 @@ func toStringLiteralSlice(strings []*string) []string {
 
 func (d *Driver) Create(ctx context.Context, options *types.DriverOptions, _ *types.ClusterInfo) (*types.ClusterInfo, error) {
 	logrus.Infof("Starting create")
+	logrus.Infof("Starting create")
 
 	state, err := getStateFromOptions(options)
 	if err != nil {
