@@ -1,5 +1,8 @@
 package main
 
+func main() {
+}
+/*
 import (
 	"os"
 
@@ -77,4 +80,4 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		logrus.Fatal(err)
 	}
-}
+} */
