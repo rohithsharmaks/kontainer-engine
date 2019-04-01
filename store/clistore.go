@@ -284,13 +284,27 @@ func deleteConfigByName(config *KubeConfig, name string) {
 	config.Users = users
 }
 
+func (c CLIPersistStore) GetKubeConfig(name string) (string, error) {
+	fileDir, err := getClusterPath(name)
+	kubeConfigPath := utils.KubeConfigFilePath(fileDir)
+
+	fmt.Println("kube config path ", kubeConfigPath)
+	data, err := getRawKubeConfig(kubeConfigPath)
+	fmt.Println("kube config data ", string(data))
+
+	return string(data), err
+}
+
+func getRawKubeConfig(filepath string) ([]byte, error) {
+	return ioutil.ReadFile(filepath)
+}
+
 func getConfigFromFile(filepath string) (KubeConfig, error) {
-	configFile := utils.KubeConfigFilePath(filepath)
-	config := KubeConfig{}
-	data, err := ioutil.ReadFile(configFile)
+	data, err:= getRawKubeConfig(filepath)
 	if err != nil {
 		return KubeConfig{}, err
 	}
+	config := KubeConfig{}
 	if err := yaml.Unmarshal(data, &config); err != nil {
 		return KubeConfig{}, err
 	}
