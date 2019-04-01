@@ -163,6 +163,7 @@ func storeConfig(c cluster.Cluster) error {
 	}
 	config.APIVersion = "v1"
 	config.Kind = "Config"
+	config.CurrentContext = c.Name
 
 	// setup clusters
 	host := c.Endpoint
