@@ -36,9 +36,10 @@ func (c CLIPersistStore) Remove(name string) error {
 	fileDir, err := getClusterPath(name)
 	//filePath := utils.KubeConfigFilePath(fileDir)
 	//config, err := getConfigFromFile(filePath)
-	//if err != nil {
-	//	fmt.Println("Cout not locate/open kubeconfig. Ignoring")
-	//} else {
+	if err != nil {
+		fmt.Println("Cout not locate/open kubeconfig. Ignoring")
+	} 
+        // else {
 	//	deleteConfigByName(&config, name)
 	//	if err := setConfigToFile(filePath, config); err != nil {
 	//		return err
