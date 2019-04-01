@@ -34,19 +34,19 @@ func (c CLIPersistStore) GetStatus(name string) (string, error) {
 
 func (c CLIPersistStore) Remove(name string) error {
 	fileDir, err := getClusterPath(name)
-	filePath := utils.KubeConfigFilePath(fileDir)
-	config, err := getConfigFromFile(filePath)
-	if err != nil {
-		return err
-	}
+	//filePath := utils.KubeConfigFilePath(fileDir)
+	//config, err := getConfigFromFile(filePath)
+	//if err != nil {
+	//	fmt.Println("Cout not locate/open kubeconfig. Ignoring")
+	//} else {
+	//	deleteConfigByName(&config, name)
+	//	if err := setConfigToFile(filePath, config); err != nil {
+	//		return err
+	//	}
+	//}
 
-	deleteConfigByName(&config, name)
-	if err := setConfigToFile(filePath, config); err != nil {
-		return err
-	}
-
-	path, err := getClusterPath(name)
-	return os.RemoveAll(path)
+	//Remove cluster directory
+	return os.RemoveAll(fileDir)
 }
 
 func getClusterPath(name string) ( string , error ) {
