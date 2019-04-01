@@ -33,7 +33,8 @@ func (c CLIPersistStore) GetStatus(name string) (string, error) {
 }
 
 func (c CLIPersistStore) Remove(name string) error {
-	filePath, err := getClusterPath(name)
+	fileDir, err := getClusterPath(name)
+	filePath := utils.KubeConfigFilePath(fileDir)
 	config, err := getConfigFromFile(filePath)
 	if err != nil {
 		return err
