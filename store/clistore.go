@@ -51,7 +51,7 @@ func (c CLIPersistStore) Remove(name string) error {
 }
 
 func getClusterPath(name string) ( string , error ) {
-	return filepath.Join(utils.HomeDir(), "clusters", name), nil
+	return filepath.Join(utils.ClusterStoreDir(), name), nil
 }
 
 func (c CLIPersistStore) Get(name string) (cluster.Cluster, error) {
@@ -256,7 +256,7 @@ func storeConfig(c cluster.Cluster) error {
 		return err
 	}
 
-	fmt.Println("KubeConfig files is saved to : ", configFile)
+	logrus.Info("KubeConfig file is saved to : ", configFile)
 	logrus.Debugf("KubeConfig files is saved to %s", configFile)
 	logrus.Debug("Kubeconfig file\n" + string(data))
 
@@ -291,9 +291,8 @@ func (c CLIPersistStore) GetKubeConfig(name string) (string, error) {
 	fileDir, err := getClusterPath(name)
 	kubeConfigPath := utils.KubeConfigFilePath(fileDir)
 
-	fmt.Println("kube config path ", kubeConfigPath)
+	logrus.Info("Retrieving Kube config from path ", kubeConfigPath)
 	data, err := getRawKubeConfig(kubeConfigPath)
-	fmt.Println("kube config data ", string(data))
 
 	return string(data), err
 }

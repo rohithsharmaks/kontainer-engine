@@ -51,6 +51,12 @@ func HomeDir() string {
 	return filepath.Join(homeDir, ".kontainer")
 }
 
+func ClusterStoreDir() string {
+	clusterStoreDir := os.Getenv("CLUSTER_STORE_DIR")
+
+	return filepath.Join(clusterStoreDir, "clusters")
+}
+
 func KubeConfigFilePath(basePath string) string {
 	return filepath.Join(basePath, defaultFileName)
 }
